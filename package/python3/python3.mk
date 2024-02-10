@@ -201,7 +201,8 @@ PYTHON3_CONF_OPTS += \
 	--disable-test-modules \
 	--disable-tk \
 	--disable-idle3 \
-	--disable-pyc-build
+	--disable-pyc-build \
+	--with-optimizations
 
 #
 # Remove useless files. In the config/ directory, only the Makefile
