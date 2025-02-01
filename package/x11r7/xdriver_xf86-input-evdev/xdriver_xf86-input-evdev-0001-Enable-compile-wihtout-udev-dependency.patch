@@ -12,15 +12,15 @@ diff --git a/configure.ac b/configure.ac
 index dff2bcf..23baad8 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -46,7 +46,7 @@ XORG_DEFAULT_OPTIONS
- 
+@@ -45,7 +45,7 @@
+
  # Obtain compiler/linker options from server and required extensions
  PKG_CHECK_MODULES(XORG, [xorg-server >= 1.12] xproto [inputproto >= 2.1.99.3])
 -PKG_CHECK_MODULES(UDEV, libudev)
 +PKG_CHECK_MODULES(UDEV, libudev, [AC_DEFINE([HAVE_UDEV], [1], [Use UDEV])], [ ])
- 
+
  PKG_CHECK_MODULES(LIBEVDEV, [libevdev >= 0.4])
- 
+ PKG_CHECK_MODULES(MTDEV, mtdev)
 diff --git a/src/evdev.c b/src/evdev.c
 index d540b87..0eedcdd 100644
 --- a/src/evdev.c
@@ -43,7 +43,7 @@ index d540b87..0eedcdd 100644
      struct udev *udev = NULL;
      struct udev_device *device = NULL;
      struct stat st;
-@@ -322,6 +325,9 @@ out:
+@@ -256,6 +260,9 @@
      udev_device_unref(device);
      udev_unref(udev);
      return rc;
@@ -51,8 +51,3 @@ index d540b87..0eedcdd 100644
 +    return FALSE;
 +#endif
  }
- 
- #ifndef HAVE_SMOOTH_SCROLLING
--- 
-1.8.1.4
-
